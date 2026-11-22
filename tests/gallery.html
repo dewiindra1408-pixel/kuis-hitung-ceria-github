@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../css/style.css"><style>body{background:#dfe9ff}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:12px;padding:12px}.qcard h4{margin:0;color:#888}</style></head>
+<body><div class="g" id="g"></div><script type="module">
+import { generate } from '../js/bank.js'; import '../js/bank46.js'; import '../js/art46.js'; import { TOPICS } from '../js/curriculum.js'; import { makeRng } from '../js/rng.js'; import { renderVisual, optionHtml, fracify } from '../js/art.js';
+const P=new URLSearchParams(location.search); const ids=(P.get('t')||'').split(',').filter(Boolean); const seed=Number(P.get('s')||1);
+let h=''; for(const t of TOPICS){ if(ids.length&&!ids.includes(t.id))continue; for(let l=1;l<=3;l++){ const it=generate(t.id,l,makeRng(seed*31+l));
+h+=`<div class="qcard"><h4>${t.id} L${l}</h4><h1 class="qtext">${fracify(it.q)}</h1><div class="qvis">${renderVisual(it.v)}</div><div class="answers">${it.opts.map((o,i)=>`<div class="ans ${String(o.value)===String(it.ans)?'right':''}"><span class="key"><span>${'ABCD'[i]}</span></span><span class="lab">${optionHtml(o.label)}</span></div>`).join('')}</div><p>${fracify(it.explain)}</p></div>`;}}
+document.getElementById('g').innerHTML=h; document.body.dataset.ready=1;
+</script></body></html>
