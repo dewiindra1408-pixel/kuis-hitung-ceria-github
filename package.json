@@ -1,0 +1,12 @@
+{
+  "name": "kuis-hitung-ceria",
+  "version": "2.0.0",
+  "description": "Kuis matematika interaktif untuk SD kelas 1–6 berbasis Kurikulum Merdeka",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8765",
+    "test": "node tests/verify.mjs 200"
+  },
+  "license": "MIT"
+}
